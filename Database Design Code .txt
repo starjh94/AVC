@@ -1,38 +1,28 @@
-µ¥ÀÌÅÍº£ÀÌ½º Á¦ÀÛ //´Â ÁÖ¼®ÀÌ´Ï mysql¿¡ ±âÀÔÇÏÁö ¸»°Í.
+ë°ì´í„°ë² ì´ìŠ¤ ì œìž‘ //ëŠ” ì£¼ì„ì´ë‹ˆ mysqlì— ê¸°ìž…í•˜ì§€ ë§ê²ƒ.
 
-create databases DBP; // DB ÀÌ¸§
+create databases DBP; // DB ì´ë¦„
 use dbp;
 
-
-create table userdata(
-    userID varchar(20) primary key, // ±âÁØ°ª
-    pwd varchar(20) not null,
-    email_address varchar(20),
-    phonenum char(11)
-    );
-// °¡ÀÔÇÑ ¸â¹öÀÇ »ó¼¼
-
-create table group_name(
-    group_name varchar(30) primary key, // ±âÁØ°ª
-    member_id varchar(20) not null,
-    project_name varchar(20) not null
-    );
-// ±×·ì¿¡ ´ëÇÑ »ó¼¼
-
-create table project_data(
-    project_name varchar(30) primary key,
-    file_path varchar(400) not null,
-    publisher_id varchar(20) not null,
-    create_request_time timestamp not null,
-    open_choice int not null
-    );
-// ÇÁ·ÎÁ§Æ®¿¡ ´ëÇÑ »ó¼¼
+create table user_data(
+    -> id varchar(30) not null primary key,
+    -> pw varchar(30) not null
+    -> )engine = innodb;
+// ìœ ì €ë°ì´í„° ìž…ë ¥ 
 
 
-create table comment_data(
-    project_name varchar(30) primary key,
-    member_id varchar(20) not null,
-    comment text not null,
-    comment_upload_time timestamp not null
-    );
-// ÄÚ¸àÆ®¿¡ ´ëÇÑ »ó¼¼
+create table project_table(
+    -> file_name text not null,
+    -> file_path text not null,
+    -> file_data mediumblob not null,
+    -> publisher_id varchar(30) not null
+    -> );
+// í”„ë¡œì íŠ¸ í…Œì´ë¸” ìž…ë ¥
+
+
+create table project_member(
+    -> project varchar(30) not null primary key,
+    -> id varchar(30) not null,
+    -> key id(id),
+    -> foreign key(id) references user_data(id) on delete cascade
+    -> )engine = innodb;
+// í”„ë¡œì íŠ¸ ë©¤ë²„ì— ëŒ€í•œ ìž…ë ¥, í”„ë¡œì íŠ¸ ë©¤ë²„ì˜ ë”•ì•„ì´ë””ê°€ ì™¸ë¶€í‚¤ë¡œ ì„ ì–¸
